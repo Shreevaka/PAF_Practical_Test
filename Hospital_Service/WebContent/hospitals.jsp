@@ -33,7 +33,7 @@ div.container {
 				<h1 align="center">Hospitals Management</h1>
 				<br>
 
-				<form id="formHospital" name="formHospital" method="post" action="hospitals.jsp">
+				<form id="formHospital" name="formHospital">
 					
 					Hospital Name: 
 					<input id="hosName" name="hosName" type="text" class="form-control form-control-sm">

@@ -23,7 +23,6 @@ public class Hospital {
 	}
 	
 	
-	
 	public String insertHospital(String hosName, String hosAddress, String hosPhoneNo, String hosEmail, String hosNoOfRooms) {
 		String output = "";
 
@@ -31,7 +30,7 @@ public class Hospital {
 			Connection con = connect();
 
 			if (con == null) {
-				return "Error while connecting to the database";
+				return "Error while connecting to the database for inserting.";
 			}
 
 			// create a prepared statement
@@ -50,10 +49,11 @@ public class Hospital {
 			preparedStmt.execute();
 			con.close();
 
-			output = "Inserted successfully";
+			String newHospitals = readHospitals();
+			output = "{\"status\":\"success\", \"data\": \"" + newHospitals + "\"}";
 
 		} catch (Exception e) {
-			output = "Error while inserting";
+			output ="{\"status\":\"error\", \"data\": \"Error while inserting the hospital.\"}";
 			System.err.println(e.getMessage());
 		}
 
@@ -69,7 +69,7 @@ public class Hospital {
 				return "Error while connecting to the database for reading.";
 			}
 			// Prepare the html table to be displayed
-			output = "<table border='1\' width= '100%'><tr><th>Hospital Name</th> <th>Hospital Address</th> <th>Hospital Phone No</th> <th>Hospital Email</th> <th>No Of Rooms</th> <th>Update</th> <th>Remove</th></tr>";
+			output = "<table border='1' width= '100%'><tr><th>Hospital Name</th> <th>Hospital Address</th> <th>Hospital Phone No</th> <th>Hospital Email</th> <th>No Of Rooms</th> <th>Update</th> <th>Remove</th></tr>";
 
 			String query = "select * from hospitals";
 			Statement stmt = con.createStatement();
@@ -127,9 +127,15 @@ public class Hospital {
 			// execute the statement
 			preparedStmt.execute();
 			con.close();
-			output = "Updated successfully";
-		} catch (Exception e) {
-			output = "Error while updating the item.";
+			
+			String newHospitals = readHospitals();
+			output = "{\"status\":\"success\", \"data\": \"" + newHospitals + "\"}";
+			
+			
+		}
+		catch (Exception e)
+		{
+			output = "{\"status\":\"error\", \"data\": \"Error while updating the item.\"}";
 			System.err.println(e.getMessage());
 		}
 		return output;
@@ -158,9 +164,13 @@ public class Hospital {
 			preparedStmt.execute();
 			con.close();
 
-			output = "Deleted successfully";
-		} catch (Exception e) {
-			output = "Error while deleting the item.";
+			String newHospitals = readHospitals();
+			output = "{\"status\":\"success\", \"data\" \"" + newHospitals + "\"}";
+				
+		} 
+		catch (Exception e)
+		{
+			output = "{\"status\":\"error\", \"data\": \"Error while deleting the item.\"}";
 			System.err.println(e.getMessage());
 		}
 
