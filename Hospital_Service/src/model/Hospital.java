@@ -59,8 +59,7 @@ public class Hospital {
 
 		return output;
 	}
-	
-	
+		
 	
 	public String readHospitals() {
 		String output = "";

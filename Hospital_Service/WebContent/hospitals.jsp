@@ -2,36 +2,6 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
 	pageEncoding="ISO-8859-1"%>
 
-<%
-	//Initialize---------------------------
-session.setAttribute("statusMsg", "");
-System.out.println("Tryingto process...");
-
-//Save---------------------------------
-if (request.getParameter("hosName") != null) {
-	Hospital hospitalObj = new Hospital();
-	String stsMsg = "";
-	//Insert--------------------------
-	if (request.getParameter("hidhosIDSave") == "") {
-		stsMsg = hospitalObj.insertHospital(request.getParameter("hosName"), request.getParameter("hosAddress"),
-		request.getParameter("hosPhoneNo"), request.getParameter("hosEmail"),
-		request.getParameter("hosNoOfRooms"));
-	} else//Update----------------------
-	{
-		stsMsg = hospitalObj.updateHospital(request.getParameter("hidhosIDSave"), request.getParameter("hosName"),
-		request.getParameter("hosAddress"), request.getParameter("hosPhoneNo"),
-		request.getParameter("hosEmail"), request.getParameter("hosNoOfRooms"));
-	}
-	session.setAttribute("statusMsg", stsMsg);
-}
-//Delete-----------------------------
-if (request.getParameter("hidhosIDDelete") != null) {
-	Hospital hospitalObj = new Hospital();
-	String stsMsg = hospitalObj.deleteHospital(request.getParameter("hidhosIDDelete"));
-	session.setAttribute("statusMsg", stsMsg);
-}
-%>
-
 
 <!DOCTYPE html>
 <html>
@@ -64,20 +34,29 @@ div.container {
 				<br>
 
 				<form id="formHospital" name="formHospital" method="post" action="hospitals.jsp">
-					Hospital Name: <input id="hosName" name="hosName" type="text" class="form-control form-control-sm"> <br> 
-					Hospital Address: <input id="hosAddress" name="hosAddress" type="text" class="form-control form-control-sm"> <br> Hospital
-					Phone No: <input id="hosPhoneNo" name="hosPhoneNo" type="text" class="form-control form-control-sm"> <br> 
-					Hospital Email: <input id="hosEmail" name="hosEmail" type="text" class="form-control form-control-sm"> <br> 
-					No Of Rooms: <input id="hosNoOfRooms" name="hosNoOfRooms" type="text" class="form-control form-control-sm"> <br> 
-					<input id="btnSave" name="btnSave" type="button" value="Save" class="btn btn-primary btn-lg btn-block"> <input type="hidden" id="hidhosIDSave" name="hidhosIDSave" value="">
+					
+					Hospital Name: 
+					<input id="hosName" name="hosName" type="text" class="form-control form-control-sm">
+					
+					<br> Hospital Address: 
+					<input id="hosAddress" name="hosAddress" type="text" class="form-control form-control-sm">
+					
+					<br> Hospital Phone No: 
+					<input id="hosPhoneNo" name="hosPhoneNo" type="text" class="form-control form-control-sm">
+					
+					<br> Hospital Email: 
+					<input id="hosEmail" name="hosEmail" type="text" class="form-control form-control-sm">
+					
+					<br> No Of Rooms: 
+					<input id="hosNoOfRooms" name="hosNoOfRooms" type="text" class="form-control form-control-sm">
+					
+					<br> 
+					<input id="btnSave" name="btnSave" type="button" value="Save" class="btn btn-primary btn-lg btn-block">
+					<input type="hidden" id="hidhosIDSave" name="hidhosIDSave" value="">
 				</form>
 				<br>
 
-					<div id="alertSuccess" class="alert alert-success">
-						<%
-							out.print(session.getAttribute("statusMsg"));
-						%>
-					</div>
+					<div id="alertSuccess" class="alert alert-success"></div>
 					<div id="alertError" class="alert alert-danger"></div>
 				<br>
 			</div>
@@ -91,7 +70,7 @@ div.container {
 	<br>
 		<div class="row">
 			<div class="col-sm-1"></div>
-			<div class="col-sm-10">
+			<div id="divHospitalsGrid" class="col-sm-10">
 				<%
 				Hospital hospitalObj = new Hospital();
 				out.print(hospitalObj.readHospitals());
