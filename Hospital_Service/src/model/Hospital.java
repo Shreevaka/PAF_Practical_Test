@@ -69,7 +69,7 @@ public class Hospital {
 				return "Error while connecting to the database for reading.";
 			}
 			// Prepare the html table to be displayed
-			output = "<table border=\"1\" width= \"100%\"><tr><th>Hospital Name</th> <th>Hospital Address</th> <th>Hospital Phone No</th> <th>Hospital Email</th> <th>No Of Rooms</th> <th>Update</th> <th>Remove</th></tr>";
+			output = "<table border='1\' width= '100%'><tr><th>Hospital Name</th> <th>Hospital Address</th> <th>Hospital Phone No</th> <th>Hospital Email</th> <th>No Of Rooms</th> <th>Update</th> <th>Remove</th></tr>";
 
 			String query = "select * from hospitals";
 			Statement stmt = con.createStatement();
@@ -83,22 +83,22 @@ public class Hospital {
 				String hosEmail = rs.getString("hosEmail");
 				String hosNoOfRooms = rs.getString("hosNoOfRooms");
 				// Add into the html table
-				output += "<tr><td><input id=\"hidhosIDUpdate\" name=\"hidhosIDUpdate\" type=\"hidden\" value=\""
-						+ hosID + "\">" + hosName + "</td>";
+				output += "<tr><td><input id='hidhosIDUpdate' name='hidhosIDUpdate' type='hidden' value='"
+						+ hosID + "'>" + hosName + "</td>";
 				output += "<td>" + hosAddress + "</td>";
 				output += "<td>" + hosPhoneNo + "</td>";
 				output += "<td>" + hosEmail + "</td>";
 				output += "<td>" + hosNoOfRooms + "</td>";
 				// buttons
-				output += "<td><input name=\"btnUpdate\" type=\"button\" value=\"Update\" class=\" btnUpdate btn btn-secondary\"></td> <td><form method=\"post\" action=\"hospitals.jsp\"> <input name=\"btnRemove\" type=\"submit\" value=\"Remove\" class=\"btn btn-danger\"> <input name=\"hidhosIDDelete\" type=\"hidden\" value=\""
-						+ hosID + "\">" + "</form></td></tr>";
+				output += "<td><input name='btnUpdate' type='button' value='Update' class='btnUpdate btn btn-secondary'></td> <td><input name='btnRemove' type='button' value='Remove' class='btn btn-danger' data-hospitalid='" + hosID + "'>" + "</form></td></tr>";
 			}
 			con.close();
 			// Complete the html table
 			output += "</table>";
 		}
 
-		catch (Exception e) {
+		catch (Exception e)
+		{
 			output = "Error while reading the items.";
 			System.err.println(e.getMessage());
 		}
