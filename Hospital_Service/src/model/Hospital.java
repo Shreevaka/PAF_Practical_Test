@@ -34,7 +34,7 @@ public class Hospital {
 			}
 
 			// create a prepared statement
-			String query = "insert into hospitals (`hosID`,`hosName`,`hosAddress`,`hosPhoneNo`,`hosEmail`,`hosNoOfRooms`)"+ "values(?, ?, ?, ?, ?, ?)";
+			String query = "insert into hospitals (`hosID`,`hosName`,`hosAddress`,`hosPhoneNo`,`hosEmail`,`hosNoOfRooms`)" + "values(?, ?, ?, ?, ?, ?)";
 
 			PreparedStatement preparedStmt = con.prepareStatement(query);
 
@@ -45,6 +45,7 @@ public class Hospital {
 			preparedStmt.setString(4, hosPhoneNo);
 			preparedStmt.setString(5, hosEmail);
 			preparedStmt.setString(6, hosNoOfRooms);
+			
 			// execute the statement
 			preparedStmt.execute();
 			con.close();
@@ -69,7 +70,7 @@ public class Hospital {
 				return "Error while connecting to the database for reading.";
 			}
 			// Prepare the html table to be displayed
-			output = "<table border='1' width= '100%'><tr><th>Hospital Name</th> <th>Hospital Address</th> <th>Hospital Phone No</th> <th>Hospital Email</th> <th>No Of Rooms</th> <th>Update</th> <th>Remove</th></tr>";
+			output = "<table border='1' width='100%'><tr><th>Hospital Name</th> <th>Hospital Address</th> <th>Hospital Phone No</th> <th>Hospital Email</th> <th>No Of Rooms</th> <th>Update</th> <th>Remove</th></tr>";
 
 			String query = "select * from hospitals";
 			Statement stmt = con.createStatement();
@@ -83,6 +84,7 @@ public class Hospital {
 				String hosPhoneNo = rs.getString("hosPhoneNo");
 				String hosEmail = rs.getString("hosEmail");
 				String hosNoOfRooms = rs.getString("hosNoOfRooms");
+				
 				// Add into the html table
 				output += "<tr><td><input id='hidhosIDUpdate' name='hidhosIDUpdate' type='hidden' value='"
 						+ hosID + "'>" + hosName + "</td>";
@@ -118,6 +120,7 @@ public class Hospital {
 
 			String query = "UPDATE hospitals SET hosName=?,hosAddress=?,hosPhoneNo=?,hosEmail=?,hosNoOfRooms=? WHERE hosID=?";
 			PreparedStatement preparedStmt = con.prepareStatement(query);
+			
 			// binding values
 			preparedStmt.setString(1, hosName);
 			preparedStmt.setString(2, hosAddress);
@@ -125,6 +128,7 @@ public class Hospital {
 			preparedStmt.setString(4, hosEmail);
 			preparedStmt.setString(5, hosNoOfRooms);
 			preparedStmt.setInt(6, Integer.parseInt(hosID));
+			
 			// execute the statement
 			preparedStmt.execute();
 			con.close();
@@ -166,7 +170,7 @@ public class Hospital {
 			con.close();
 
 			String newHospitals = readHospitals();
-			output = "{\"status\":\"success\", \"data\" \"" + newHospitals + "\"}";
+			output = "{\"status\":\"success\", \"data\": \"" + newHospitals + "\"}";
 				
 		} 
 		catch (Exception e)

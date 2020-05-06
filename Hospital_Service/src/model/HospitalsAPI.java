@@ -1,5 +1,7 @@
 package model;
 
+import model.Hospital;
+
 import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;

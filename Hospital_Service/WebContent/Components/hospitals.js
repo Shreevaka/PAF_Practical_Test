@@ -53,7 +53,7 @@ function onItemSaveComplete(response, status)
 			$("#alertSuccess").text("Successfully saved.");
 			$("#alertSuccess").show();
 			
-			$("#divItemsGrid").html(resultSet.data);
+			$("#divHospitalsGrid").html(resultSet.data);
 		}
 		else if (resultSet.status.trim() == "error")
 		{
@@ -89,7 +89,7 @@ $(document).on("click",".btnUpdate",function(event)
 });
 
 //REMOVE==========================================
-$(document).on("click","#btnRemove",function(event)
+$(document).on("click",".btnRemove",function(event)
 {
 	$.ajax(
 	{
@@ -115,7 +115,7 @@ function onItemDeleteComplete(response, status)
 			$("#alertSuccess").text("Successfully deleted.");
 			$("#alertSuccess").show();
 			
-			$("#divItemsGrid").html(resultSet.data);
+			$("#divHospitalsGrid").html(resultSet.data);
 		} else if (resultSet.status.trim() == "error")
 		{
 			$("#alertError").text(resultSet.data);
