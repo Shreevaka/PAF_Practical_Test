@@ -34,7 +34,7 @@ public class Hospital {
 			}
 
 			// create a prepared statement
-			String query = "insert into hospitals values(?, ?, ?, ?, ?, ?)";
+			String query = "insert into hospitals (`hosID`,`hosName`,`hosAddress`,`hosPhoneNo`,`hosEmail`,`hosNoOfRooms`)"+ "values(?, ?, ?, ?, ?, ?)";
 
 			PreparedStatement preparedStmt = con.prepareStatement(query);
 
@@ -74,6 +74,7 @@ public class Hospital {
 			String query = "select * from hospitals";
 			Statement stmt = con.createStatement();
 			ResultSet rs = stmt.executeQuery(query);
+			
 			// iterate through the rows in the result set
 			while (rs.next()) {
 				String hosID = Integer.toString(rs.getInt("hosID"));
@@ -90,7 +91,7 @@ public class Hospital {
 				output += "<td>" + hosEmail + "</td>";
 				output += "<td>" + hosNoOfRooms + "</td>";
 				// buttons
-				output += "<td><input name='btnUpdate' type='button' value='Update' class='btnUpdate btn btn-secondary'></td> <td><input name='btnRemove' type='button' value='Remove' class='btn btn-danger' data-hospitalid='" + hosID + "'>" + "</form></td></tr>";
+				output += "<td><input name='btnUpdate' type='button' value='Update' class='btnUpdate btn btn-secondary'></td> <td><input name='btnRemove' type='button' value='Remove' class='btnRemove btn btn-danger' data-hospitalid='" + hosID + "'>" + "</td></tr>";
 			}
 			con.close();
 			// Complete the html table
